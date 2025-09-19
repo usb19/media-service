@@ -1,0 +1,36 @@
+import uuid
+import config
+from utils.aws_clients import s3
+
+def generate_upload_url(user_id, content_type="image/jpeg", request_id=None):
+    media_id = str(uuid.uuid4())
+    key = f"{user_id}/{media_id}"
+
+    extra_metadata = {}
+    if request_id:
+        extra_metadata["x-amz-meta-request-id"] = request_id
+
+    url = s3.generate_presigned_url(
+        "put_object",
+        Params={
+            "Bucket": config.MEDIA_BUCKET,
+            "Key": key,
+            "ContentType": content_type,
+            "Metadata": extra_metadata
+        },
+        ExpiresIn=300
+    )
+    return media_id, key, url
+
+def generate_download_url(user_id, media_id):
+    key = f"{user_id}/{media_id}"
+    return s3.generate_presigned_url(
+        "get_object",
+        Params={"Bucket": config.MEDIA_BUCKET, "Key": key},
+        ExpiresIn=300
+    )
+
+def delete_object(user_id, media_id):
+    key = f"{user_id}/{media_id}"
+    s3.delete_object(Bucket=config.MEDIA_BUCKET, Key=key)
+    return key

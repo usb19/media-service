@@ -1,0 +1,119 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Media Service with API Gateway + Lambda + S3 + DynamoDB (LocalStack-ready)
+
+Globals:
+  Function:
+    Runtime: python3.9
+    Timeout: 20
+    MemorySize: 256
+    Environment:
+      Variables:
+        BUCKET_NAME: !Ref MediaBucket
+        TABLE_NAME: !Ref MediaTable
+        REGION: us-east-1
+
+Resources:
+  MediaBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: media-bucket
+
+  MediaTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: MediaTable
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: PK
+          AttributeType: S
+        - AttributeName: SK
+          AttributeType: S
+      KeySchema:
+        - AttributeName: PK
+          KeyType: HASH
+        - AttributeName: SK
+          KeyType: RANGE
+
+  UploadFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: handlers/upload_handler.lambda_handler
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action:
+                - logs:*
+                - s3:*
+                - dynamodb:*
+              Resource: "*"
+      Events:
+        ApiUpload:
+          Type: Api
+          Properties:
+            Path: /upload
+            Method: post
+
+  ListFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: handlers/list_handler.lambda_handler
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action:
+                - logs:*
+                - dynamodb:*
+              Resource: "*"
+      Events:
+        ApiList:
+          Type: Api
+          Properties:
+            Path: /list
+            Method: get
+
+  ViewFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: handlers/view_handler.lambda_handler
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action:
+                - logs:*
+                - s3:GetObject
+              Resource: "*"
+      Events:
+        ApiView:
+          Type: Api
+          Properties:
+            Path: /view/{mediaId}
+            Method: get
+
+  DeleteFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: handlers/delete_handler.lambda_handler
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action:
+                - logs:*
+                - s3:*
+                - dynamodb:*
+              Resource: "*"
+      Events:
+        ApiDelete:
+          Type: Api
+          Properties:
+            Path: /delete/{mediaId}
+            Method: delete
+
+Outputs:
+  ApiUrl:
+    Description: "Invoke URL for API Gateway (LocalStack)"
+    Value: !Sub "http://localhost:4566/restapis/${ServerlessRestApi}/dev/_user_request_/"

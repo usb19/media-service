@@ -1,6 +1,5 @@
 
 # 📄 Technical Design Document — Scalable Image Upload & Metadata Service
-Scalable image upload and metadata service built on AWS (S3, DynamoDB, API Gateway, Lambda). Supports presigned URL uploads, metadata persistence, image listing with filters, secure viewing/download, and deletion. Includes LocalStack setup for local development, unit tests, and API documentation on Python.
 
 ## 1. Overview
 We are designing a **service layer similar to Instagram’s image service**. This module supports:

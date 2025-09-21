@@ -8,14 +8,12 @@ REGION = os.getenv("AWS_REGION", "us-east-1")
 
 LOCALSTACK_HOST = os.getenv("LOCALSTACK_HOSTNAME", "localhost")
 
-if ENV == "local":
-    ENDPOINT = os.getenv("LOCALSTACK_ENDPOINT", f"http://{LOCALSTACK_HOST}:4566")
-else:
-    # In dev/prod, boto3 should hit real AWS (no endpoint override)
-    ENDPOINT = None
+ENDPOINT = os.getenv("LOCALSTACK_ENDPOINT", f"http://{LOCALSTACK_HOST}:4566") # Used only for localstack deafult to aws for other env
+# External (for API responses to clients)
+PUBLIC_ENDPOINT = os.getenv("PUBLIC_ENDPOINT", "http://localhost:4566") # This will be your bucket base path https://<bucket>.s3.amazonaws.com
 
 # Resources
-MEDIA_BUCKET = os.getenv("MEDIA_BUCKET", "MediaBucket")
+MEDIA_BUCKET = os.getenv("MEDIA_BUCKET", "media-bucket")
 MEDIA_TABLE = os.getenv("MEDIA_TABLE", "MediaTable")
 
 # Auth

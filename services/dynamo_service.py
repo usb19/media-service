@@ -21,3 +21,12 @@ def delete_media(user_id, media_id):
         "PK": f"user#{user_id}",
         "SK": f"media#{media_id}"
     })
+
+def mark_media_completed(user_id: str, media_id: str):
+    """Mark a media item as COMPLETED after upload"""
+    table.update_item(
+        Key={"PK": f"user#{user_id}", "SK": f"media#{media_id}"},
+        UpdateExpression="SET #s = :status",
+        ExpressionAttributeNames={"#s": "status"},
+        ExpressionAttributeValues={":status": "COMPLETED"},
+    )

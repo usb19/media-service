@@ -47,3 +47,8 @@ delete-local:
 # Remove build artifacts
 clean:
 	rm -rf .aws-sam
+
+# start api gateway
+start-api:
+	AWS_ACCESS_KEY_ID=test AWS_SECRET_ACCESS_KEY=test AWS_DEFAULT_REGION=$(REGION) \
+	samlocal local start-api --docker-network media-service_localstack-net

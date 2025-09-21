@@ -11,7 +11,6 @@ from utils.logger import logger
 @with_request_id
 def lambda_handler(event, context):
     request_id = event["requestId"]
-
     try:
         logger.info({"requestId": request_id, "event": "START_UPLOAD_HANDLER", "details": event})
 
@@ -19,7 +18,7 @@ def lambda_handler(event, context):
         claims = extract_jwt_claims(event)
         logger.info({"requestId": request_id, "step": "JWT_EXTRACTED", "claims": claims})
 
-        user_id = claims.get("sub")
+        user_id = claims.get("user_id")
         if not user_id:
             raise BadRequestError("Invalid token: missing user subject")
 

@@ -1,5 +1,9 @@
 version: "3.8"
 
+networks:
+  localstack-net:
+    driver: bridge
+
 services:
   localstack:
     image: localstack/localstack:latest
@@ -19,6 +23,8 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "./.localstack:/var/lib/localstack"
+    networks:
+      - localstack-net
 
 volumes:
   localstack_data:

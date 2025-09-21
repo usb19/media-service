@@ -8,7 +8,6 @@ def extract_jwt_claims(event):
 
     if not auth_header or not auth_header.startswith("Bearer "):
         raise UnauthorizedError("Missing or invalid Authorization header")
-    return {"sub": "1"}
 
     token = auth_header.split(" ")[1]
 

@@ -52,3 +52,11 @@ clean:
 start-api:
 	AWS_ACCESS_KEY_ID=test AWS_SECRET_ACCESS_KEY=test AWS_DEFAULT_REGION=$(REGION) \
 	samlocal local start-api --docker-network media-service_localstack-net
+
+test:
+	PYTHONPATH=. pytest --cov=services --cov=handlers --cov=utils --cov-report=term-missing
+
+lint:
+	flake8 services handlers utils
+
+check: lint test

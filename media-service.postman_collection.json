@@ -1,0 +1,562 @@
+{
+	"info": {
+		"_postman_id": "164e1fcc-8c91-4777-89df-c8c26d0b214a",
+		"name": "media-service",
+		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15992747"
+	},
+	"item": [
+		{
+			"name": "Fetch Upload Signed URL ",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"contentType\":\"{{contentType}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/upload",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"upload"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST \\\n  http://127.0.0.1:3000/upload \\\n  -H \"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMTIzIiwiZXhwIjoxNzYxMDcxMTMxfQ.NXVm36yvGBrQETZWEvFLejl9EfBNGOJrTJqw63NRxcM\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"contentType\":\"image/jpeg\"}'"
+			},
+			"response": [
+				{
+					"name": "Fetch Upload Signed URL",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"contentType\":\"{{contentType}}\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/upload",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"upload"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.1.3 Python/3.13.7"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Sep 2025 21:09:02 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "391"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"uploadUrl\": \"http://localhost:4566/media-bucket/123/fd984949-6200-4e64-9ad9-5c6d6040a3dd?AWSAccessKeyId=test&Signature=jisxnEazrrVH4%2FPrD6Qzfzu5VFc%3D&content-type=image%2Fjpeg&x-amz-meta-x-amz-meta-request-id=934df410-7709-4d5e-83e3-c100cea062c4&Expires=1758489241\",\n    \"mediaId\": \"fd984949-6200-4e64-9ad9-5c6d6040a3dd\",\n    \"requestId\": \"934df410-7709-4d5e-83e3-c100cea062c4\",\n    \"userId\": \"123\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Upload Image",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{contentType}}"
+					}
+				],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "/Users/shricharana/Downloads/workspace/media-service/image.jpg"
+					}
+				},
+				"url": {
+					"raw": "{{presigned_url}}",
+					"host": [
+						"{{presigned_url}}"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST \\\n  http://127.0.0.1:3000/upload \\\n  -H \"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMTIzIiwiZXhwIjoxNzYxMDcxMTMxfQ.NXVm36yvGBrQETZWEvFLejl9EfBNGOJrTJqw63NRxcM\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"contentType\":\"image/jpeg\"}'"
+			},
+			"response": [
+				{
+					"name": "Fetch Upload Signed URL  Copy",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "{{contentType}}"
+							}
+						],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": "/Users/shricharana/Downloads/workspace/media-service/image.jpg"
+							},
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{presigned_url}}",
+							"host": [
+								"{{presigned_url}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Server",
+							"value": "TwistedWeb/24.3.0"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Sep 2025 21:16:12 GMT"
+						},
+						{
+							"key": "ETag",
+							"value": "\"26adfb8f93a99f2141c6032f281fe24a\""
+						},
+						{
+							"key": "x-amz-checksum-crc64nvme",
+							"value": "GayZviUYJRM="
+						},
+						{
+							"key": "x-amz-checksum-type",
+							"value": "FULL_OBJECT"
+						},
+						{
+							"key": "x-amz-server-side-encryption",
+							"value": "AES256"
+						},
+						{
+							"key": "x-amz-request-id",
+							"value": "c52b0ac4-6156-48ba-8603-d8f217065e73"
+						},
+						{
+							"key": "x-amz-id-2",
+							"value": "s9lzHYrFp76ZVxRcpX9+5cjAnEH2ROuNkd2BHfIa6UkFVdtjf5mKR3/eTPFvsiP/XV/VLi31234="
+						},
+						{
+							"key": "x-localstack",
+							"value": "true"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "List all images",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/list",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"list"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST \\\n  http://127.0.0.1:3000/upload \\\n  -H \"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMTIzIiwiZXhwIjoxNzYxMDcxMTMxfQ.NXVm36yvGBrQETZWEvFLejl9EfBNGOJrTJqw63NRxcM\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"contentType\":\"image/jpeg\"}'"
+			},
+			"response": [
+				{
+					"name": "List All Image Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/list",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"list"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.1.3 Python/3.13.7"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Sep 2025 21:30:02 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "265"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"items\": [\n        {\n            \"SK\": \"media#fd984949-6200-4e64-9ad9-5c6d6040a3dd\",\n            \"s3Key\": \"123/fd984949-6200-4e64-9ad9-5c6d6040a3dd\",\n            \"PK\": \"user#123\",\n            \"requestId\": \"934df410-7709-4d5e-83e3-c100cea062c4\",\n            \"status\": \"COMPLETED\"\n        }\n    ],\n    \"requestId\": \"934df410-7709-4d5e-83e3-c100cea062c4\"\n}"
+				}
+			]
+		},
+		{
+			"name": "View Image ( Get Presigned URL)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/view/{{mediaId}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"view",
+						"{{mediaId}}"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST \\\n  http://127.0.0.1:3000/upload \\\n  -H \"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMTIzIiwiZXhwIjoxNzYxMDcxMTMxfQ.NXVm36yvGBrQETZWEvFLejl9EfBNGOJrTJqw63NRxcM\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"contentType\":\"image/jpeg\"}'"
+			},
+			"response": [
+				{
+					"name": "View Image Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/view/{{mediaId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"view",
+								"{{mediaId}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.1.3 Python/3.13.7"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Sep 2025 21:21:25 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "229"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"downloadUrl\": \"http://localhost:4566/media-bucket/123/2eec835c-54ac-4edf-92ec-914fa8c0bf0e?AWSAccessKeyId=test&Signature=y3GS7mBenzutqHDGaVxJxMVu%2Bs0%3D&Expires=1758489985\",\n    \"requestId\": \"934df410-7709-4d5e-83e3-c100cea062c4\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Download Signed Image",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{downloadUrl}}",
+					"host": [
+						"{{downloadUrl}}"
+					]
+				},
+				"description": "Generated from cURL:  curl -o downloaded.jpg \\\n  \"http://127.0.0.1:4566/media-bucket/123/51006197-7e0c-47db-85e9-e82e41c18066?AWSAccessKeyId=test&Signature=a0t81wbGJO%2FUtLq9GeFlH5B9ZMs%3D&Expires=1758486277\"\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Image",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/delete/{{mediaId}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"delete",
+						"{{mediaId}}"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST \\\n  http://127.0.0.1:3000/upload \\\n  -H \"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMTIzIiwiZXhwIjoxNzYxMDcxMTMxfQ.NXVm36yvGBrQETZWEvFLejl9EfBNGOJrTJqw63NRxcM\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"contentType\":\"image/jpeg\"}'"
+			},
+			"response": [
+				{
+					"name": "View Image ( Get Presigned URL) Copy",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/delete/{{mediaId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"delete",
+								"{{mediaId}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.1.3 Python/3.13.7"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Sep 2025 21:29:41 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "116"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Deleted 123/2eec835c-54ac-4edf-92ec-914fa8c0bf0e\",\n    \"requestId\": \"934df410-7709-4d5e-83e3-c100cea062c4\"\n}"
+				},
+				{
+					"name": "Delete Image Response",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/delete/{{mediaId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"delete",
+								"{{mediaId}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.1.3 Python/3.13.7"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Sep 2025 21:29:41 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "116"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Deleted 123/2eec835c-54ac-4edf-92ec-914fa8c0bf0e\",\n    \"requestId\": \"934df410-7709-4d5e-83e3-c100cea062c4\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_url",
+			"value": "https://template.postman-echo.com"
+		}
+	]
+}

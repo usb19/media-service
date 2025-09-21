@@ -11,7 +11,7 @@ def lambda_handler(event, context):
     try:
         # 🔑 Extract user from JWT
         claims = extract_jwt_claims(event)
-        user_id = claims.get("sub")
+        user_id = claims.get("user_id")
 
         # Path param check
         path = event.get("pathParameters") or {}

@@ -12,6 +12,7 @@ Globals:
         BUCKET_NAME: !Ref MediaBucket
         TABLE_NAME: !Ref MediaTable
         REGION: us-east-1
+        LOCALSTACK_HOSTNAME: localstack
 
 Resources:
   MediaBucket:
@@ -112,6 +113,22 @@ Resources:
           Properties:
             Path: /delete/{mediaId}
             Method: delete
+
+  MediaStatusUpdateFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: handlers/status_update_handler.lambda_handler
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref MediaTable
+      # Events:
+      #   S3UploadEvent:
+      #     Type: S3
+      #     Properties:
+      #       Bucket: !Ref MediaBucket
+      #       Events: s3:ObjectCreated:*
+    # DependsOn: MediaBucket
 
 Outputs:
   ApiUrl:

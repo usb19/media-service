@@ -1,5 +1,5 @@
 import json
-from services.dynamo_service import mark_media_completed
+from services.dynamo_service import get_media, mark_media_completed
 from utils.response import success, failure
 from utils.errors import MediaServiceError
 from utils.logger import logger
@@ -25,11 +25,22 @@ def lambda_handler(event, context):
             parts = key.split("/", 1)
             if len(parts) != 2:
                 logger.error(f"Invalid S3 key format: {key}")
-                raise MediaServiceError(f"Invalid S3 key format: {key}", 400)
+                return failure(f"Invalid S3 key format: {key}", 400, "BadRequest")
 
             user_id, media_id = parts
             logger.debug(f"Extracted user_id={user_id}, media_id={media_id}")
 
+            # 🔎 Fetch the record first
+            item = get_media(user_id, media_id)
+            if not item:
+                logger.warning(f"No matching record found for key={key}")
+                continue
+
+            if item.get("status") == "COMPLETED":
+                logger.info(f"Media {media_id} already marked COMPLETED, skipping update")
+                continue
+
+            # ✅ Update only if not already completed
             mark_media_completed(user_id, media_id)
             logger.info(f"Marked mediaId={media_id} as COMPLETED for userId={user_id}")
 

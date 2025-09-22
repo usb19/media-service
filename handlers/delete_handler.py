@@ -5,6 +5,7 @@ from services.dynamo_service import delete_media
 from utils.response import success, failure
 from utils.errors import MediaServiceError, BadRequestError
 
+
 @with_request_id
 def lambda_handler(event, context):
     request_id = event["requestId"]
@@ -20,12 +21,15 @@ def lambda_handler(event, context):
         if not media_id:
             raise BadRequestError("Missing required path parameter: mediaId")
 
-        # Delete from S3 + DynamoDB
+        # Ensure exists & delete from DB
+        item = delete_media(user_id, media_id)
+
+        # Delete from S3
         key = delete_object(user_id, media_id)
-        delete_media(user_id, media_id)
 
         return success({
             "message": f"Deleted {key}",
+            "mediaId": media_id,
             "requestId": request_id
         })
 
